@@ -5,7 +5,7 @@
     "username": "postgres",
     "password": "",
     "database": "api",
-    "entities": ["src/**/*.js"],
+    "entities": ["src/config/**/*.js"],
     "logging": true,
     "synchronize": true
   }
