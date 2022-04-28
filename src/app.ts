@@ -1,9 +1,5 @@
 import * as express from "express";
-import {
-    Request,
-    Response
-} from "express";
-let router = require('./routes/routes.js');
-const app = express();
-app.use(express.json(), router);
+let router = require("./routes/routes")
+let app = express();
+app.use('/', router);
 app.listen(3030);

@@ -11,4 +11,4 @@ router.put("/users/:id",  func.updateOne);
 
 router.delete("/users/:id",  func.deleteOne);
 
-module.exports = router;
+module.exports = router

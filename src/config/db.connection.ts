@@ -1,5 +1,5 @@
 const typeorm = require('typeorm');
-let User = require("./entity/entity.js");
+import {User} from "../config/entity/entity.js"
 import { myDataSource } from "./data-source"
 myDataSource
     .initialize()
@@ -9,4 +9,8 @@ myDataSource
     .catch((err) => {
         console.error("Error during Data Source initialization:", err)
     })
-export let data = myDataSource;
+export let userRepository = myDataSource;
+export function getRepository(User: User) {
+    throw new Error("Function not implemented.");
+}
+

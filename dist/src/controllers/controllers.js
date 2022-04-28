@@ -36,13 +36,18 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
     }
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-var userRepository = require('../config/db.connection.js');
+var entity_js_1 = require("../config/entity/entity.js");
+var typeorm = require('typeorm');
+var repa;
+Promise.resolve().then(function () { return require('../config/db.connection'); }).then(function (userRepository) {
+    repa = userRepository.getRepository(entity_js_1.User);
+});
 function getAll(req, res) {
     return __awaiter(this, void 0, void 0, function () {
         var users;
         return __generator(this, function (_a) {
             switch (_a.label) {
-                case 0: return [4 /*yield*/, userRepository.find()];
+                case 0: return [4 /*yield*/, repa.find()];
                 case 1:
                     users = _a.sent();
                     res.json(users);
@@ -56,7 +61,7 @@ function getOne(req, res) {
         var results;
         return __generator(this, function (_a) {
             switch (_a.label) {
-                case 0: return [4 /*yield*/, userRepository.findOne({ where: { id: parseInt(req.params.id, 10) } })];
+                case 0: return [4 /*yield*/, repa.findOne({ where: { id: parseInt(req.params.id, 10) } })];
                 case 1:
                     results = _a.sent();
                     return [2 /*return*/, res.send(results)];
@@ -69,10 +74,10 @@ function createOne(req, res) {
         var user, results;
         return __generator(this, function (_a) {
             switch (_a.label) {
-                case 0: return [4 /*yield*/, userRepository.create(req.body)];
+                case 0: return [4 /*yield*/, repa.create(req.body)];
                 case 1:
                     user = _a.sent();
-                    return [4 /*yield*/, userRepository.save(user)];
+                    return [4 /*yield*/, repa.save(user)];
                 case 2:
                     results = _a.sent();
                     return [2 /*return*/, res.send(results)];
@@ -85,11 +90,11 @@ function updateOne(req, res) {
         var user, results;
         return __generator(this, function (_a) {
             switch (_a.label) {
-                case 0: return [4 /*yield*/, userRepository.findOne({ where: { id: parseInt(req.params.id, 10) } })];
+                case 0: return [4 /*yield*/, repa.findOne({ where: { id: parseInt(req.params.id, 10) } })];
                 case 1:
                     user = _a.sent();
-                    userRepository.merge(user, req.body);
-                    return [4 /*yield*/, userRepository.save(user)];
+                    repa.merge(user, req.body);
+                    return [4 /*yield*/, repa.save(user)];
                 case 2:
                     results = _a.sent();
                     return [2 /*return*/, res.send(results)];
@@ -102,7 +107,7 @@ function deleteOne(req, res) {
         var results;
         return __generator(this, function (_a) {
             switch (_a.label) {
-                case 0: return [4 /*yield*/, userRepository.delete(req.params.id)];
+                case 0: return [4 /*yield*/, repa.delete(req.params.id)];
                 case 1:
                     results = _a.sent();
                     return [2 /*return*/, res.send(results)];
